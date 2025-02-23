@@ -1,11 +1,17 @@
+import csv
+csv.field_size_limit(2147483647)
 import time
+from DataStructures.List import array_list as ar
 
 def new_logic():
+    catalog = {'elements': ar.new_list()
+               
+        }
     """
     Crea el catalogo para almacenar las estructuras de datos
     """
     #TODO: Llama a las funciónes de creación de las estructuras de datos
-    pass
+    return catalog
 
 
 # Funciones para la carga de datos
@@ -14,6 +20,19 @@ def load_data(catalog, filename):
     """
     Carga los datos del reto
     """
+    input_file = csv.DictReader(open(filename, encoding = 'uft-8'))
+    annio_mayor = 0
+    annio_menor = 0
+    for index, element in enumerate(input_file ):
+        if index == 0:
+            annio_mayor = input_file[index]['year_collection']
+            annio_menor = input_file[index]['year_collection']
+        ar.add_last(catalog['elements'], element)
+        if input_file[index]['year_collection']> annio_mayor:
+            annio_mayor = input_file[index]['year_collection']
+        if input_file[index]['year_collection'] < annio_menor:
+            annio_menor = input_file[index]['year_collection']
+    return catalog, annio_menor,annio_mayor
     # TODO: Realizar la carga de datos
     pass
 
@@ -27,10 +46,15 @@ def get_data(catalog, id):
     pass
 
 
-def req_1(catalog):
+def req_1(catalog, year):
     """
     Retorna el resultado del requerimiento 1
     """
+    
+    for element in catalog:
+        if element['year_collection'] == year:
+            pass
+        
     # TODO: Modificar el requerimiento 1
     pass
 
