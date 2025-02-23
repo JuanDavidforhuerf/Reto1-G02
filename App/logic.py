@@ -1,6 +1,7 @@
 import csv
 csv.field_size_limit(2147483647)
 import time
+from datetime import datetime
 from DataStructures.List import array_list as ar
 
 def new_logic():
@@ -45,18 +46,32 @@ def get_data(catalog, id):
     #TODO: Consulta en las Llamar la función del modelo para obtener un dato
     pass
 
+def date_to_days(date):
+    dev = datetime.strptime(date, "%Y-%m-%d") #transforma el str a fecha
+    return dev.toordinal() #devuelve la fecha en numero de dias
 
 def req_1(catalog, year):
     """
     Retorna el resultado del requerimiento 1
     """
-    
-    for element in catalog:
-        if element['year_collection'] == year:
-            pass
-        
     # TODO: Modificar el requerimiento 1
-    pass
+    
+    dev = None #diccionario de un elemento de la lista de recopilaciones
+    fecha = None #fecha en str
+    comparative = None #fecha en numero de dias
+    for element in catalog['elements']:
+        if element['year_collection'] == year:
+            if (fecha == None )and (comparative == None):
+                fecha = element['load_time']
+                comparative = date_to_days(element['load_time'])
+                dev = element
+            else:
+                current = date_to_days(element['load_time'])
+                if current > comparative:
+                    fecha = element['load_time']
+                    comparative = current
+                    dev = element                
+    return dev  #devuelve el diccionario con los atributos de la recopilacion mas reciente del año dado    
 
 
 def req_2(catalog):
