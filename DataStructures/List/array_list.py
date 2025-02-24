@@ -64,10 +64,12 @@ def remove_last(my_list):
 
 def delete_element(my_list,pos):
     my_list['elements'].pop(pos)
+    my_list['size']-=1
     return my_list
 
 def insert_element(my_list,pos, element):
     my_list['elements'].insert(pos,element)
+    my_list['size']+=1
     return my_list
 
 def change_info(my_list, pos, element):
