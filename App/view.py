@@ -1,12 +1,16 @@
 import sys
+import os
 default_limit = 1000
 sys.setrecursionlimit(default_limit*10)
-
+import App.logic as logic
+data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/'
 
 def new_logic():
     """
         Se crea una instancia del controlador
     """
+    dev = logic.new_logic()
+    return dev
     #TODO: Llamar la función de la lógica donde se crean las estructuras de datos
     pass
 
@@ -27,8 +31,37 @@ def load_data(control):
     """
     Carga los datos
     """
+    name = input("ingrese el numero del porcentaje de datos que desea cargar + .csv ")
+    filename = data_dir + "agricultural-"+name
+    dev,menor, mayor = logic.load_data(control,filename)
+    it = -1
+    print("Número total de registros: "+ str(dev['elements']['size']))
+    print("Menor año de recolección de registro: " + str(menor))
+    print("Mayor año de recolección de registro: " + str(mayor))
+    print(" ")
+    print("Primeras cinco(5) recopilaciones:")
+    for index in range(5):
+        print(str(index+1))
+        print("año de recolección del registro: " + str(dev['elements']['elements'][index]['year_collection']))
+        print('Fecha de carga del registro: '+ dev['elements']['elements'][index]['load_time'])
+        print('Departamento de registro: '+ dev['elements']['elements'][index]['state_name'] )
+        print('Origen del registro: '+ dev['elements']['elements'][index]['source'] )
+        print('Unidad de medida del registro: '+ str(dev['elements']['elements'][index]['unit_measurement']))
+        print('Valor de la medicion del registro: '+ str(dev['elements']['elements'][index]['value']))
+    print(" ")
+    print("Ultimas cinco(5) recopilaciones:")
+    while it > -5:
+        print(str(it*-1))
+        print("año de recolección del registro: " + str(dev['elements']['elements'][it]['year_collection']))
+        print('Fecha de carga del registro: '+ dev['elements']['elements'][it]['load_time'])
+        print('Departamento de registro: '+ dev['elements']['elements'][it]['state_name'] )
+        print('Origen del registro: '+ dev['elements']['elements'][it]['source'] )
+        print('Unidad de medida del registro: '+ str(dev['elements']['elements'][it]['unit_measurement']))
+        print('Valor de la medicion del registro: '+ str(dev['elements']['elements'][it]['value']))
+        it -=1
+    
     #TODO: Realizar la carga de datos
-    pass
+    
 
 
 def print_data(control, id):

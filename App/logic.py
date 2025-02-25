@@ -21,7 +21,7 @@ def load_data(catalog, filename):
     """
     Carga los datos del reto
     """
-    input_file = csv.DictReader(open(filename, encoding = 'uft-8'))
+    input_file = list(csv.DictReader(open(filename, encoding = 'utf-8')))
     annio_mayor = 0
     annio_menor = 0
     for index, element in enumerate(input_file ):
