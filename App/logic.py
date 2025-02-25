@@ -21,17 +21,17 @@ def load_data(catalog, filename):
     """
     Carga los datos del reto
     """
-    input_file = list(csv.DictReader(open(filename, encoding = 'utf-8')))
+    input_file = list(csv.DictReader(open(filename, encoding = 'utf-8'))) #crea una lista de diccionarios con cada recopilacion y sus elementos
     annio_mayor = 0
     annio_menor = 0
     for index, element in enumerate(input_file ):
         if index == 0:
+            annio_mayor = input_file[index]['year_collection'] 
+            annio_menor = input_file[index]['year_collection']  
+        ar.add_last(catalog['elements'], element) #añade cada elemento al catalogo creado y recibido como parametro
+        if input_file[index]['year_collection']> annio_mayor: #encuentra año mayor de los elementos de la lista
             annio_mayor = input_file[index]['year_collection']
-            annio_menor = input_file[index]['year_collection']
-        ar.add_last(catalog['elements'], element)
-        if input_file[index]['year_collection']> annio_mayor:
-            annio_mayor = input_file[index]['year_collection']
-        if input_file[index]['year_collection'] < annio_menor:
+        if input_file[index]['year_collection'] < annio_menor: #encuentra año menor de los elementos de la lista
             annio_menor = input_file[index]['year_collection']
     return catalog, annio_menor,annio_mayor
     # TODO: Realizar la carga de datos

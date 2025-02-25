@@ -3,7 +3,7 @@ import os
 default_limit = 1000
 sys.setrecursionlimit(default_limit*10)
 import App.logic as logic
-data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/'
+data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/' 
 
 def new_logic():
     """
@@ -32,15 +32,15 @@ def load_data(control):
     Carga los datos
     """
     name = input("ingrese el numero del porcentaje de datos que desea cargar + .csv ")
-    filename = data_dir + "agricultural-"+name
-    dev,menor, mayor = logic.load_data(control,filename)
+    filename = data_dir + "agricultural-"+name #el usuario da el portcentaje de datos que cargar + .csv   Ej: 20.csv, 40.csv,60.csv
+    dev,menor, mayor = logic.load_data(control,filename) #carga los datos con el input que el usuario de
     it = -1
     print("Número total de registros: "+ str(dev['elements']['size']))
     print("Menor año de recolección de registro: " + str(menor))
     print("Mayor año de recolección de registro: " + str(mayor))
     print(" ")
     print("Primeras cinco(5) recopilaciones:")
-    for index in range(5):
+    for index in range(5): #itera en los 5 primeros elementos para dar info 
         print(str(index+1))
         print("año de recolección del registro: " + str(dev['elements']['elements'][index]['year_collection']))
         print('Fecha de carga del registro: '+ dev['elements']['elements'][index]['load_time'])
@@ -50,7 +50,7 @@ def load_data(control):
         print('Valor de la medicion del registro: '+ str(dev['elements']['elements'][index]['value']))
     print(" ")
     print("Ultimas cinco(5) recopilaciones:")
-    while it > -5:
+    while it > -5: #itera en los 5 ultimos elementos para dar info 
         print(str(it*-1))
         print("año de recolección del registro: " + str(dev['elements']['elements'][it]['year_collection']))
         print('Fecha de carga del registro: '+ dev['elements']['elements'][it]['load_time'])
